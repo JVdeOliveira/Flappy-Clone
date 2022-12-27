@@ -9,7 +9,7 @@ public class Collumn : MonoBehaviour
 
     [SerializeField] private float speed;
 
-    private void Move()
+    public void Move()
     {
         transform.position += speed * Time.deltaTime * Vector3.left;
     }
@@ -18,11 +18,11 @@ public class Collumn : MonoBehaviour
     {
         float basePosition = 4f; //No Gap
 
-        Vector3 collumTopPosition = new(transform.position.x, basePosition + (.5f * gap));
-        Vector3 collumButtonPosition = new(transform.position.x, -(basePosition + (.5f * gap)));
+        Vector3 collumTopPosition = new(0, basePosition + (.5f * gap));
+        Vector3 collumButtonPosition = new(0, -(basePosition + (.5f * gap)));
 
-        collumButton.position = collumButtonPosition;
-        collumTop.position = collumTopPosition;
+        collumButton.localPosition = collumButtonPosition;
+        collumTop.localPosition = collumTopPosition;
     }
 
     public void Stop()

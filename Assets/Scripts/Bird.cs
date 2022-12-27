@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,9 @@ public class Bird : MonoBehaviour
     private float jumpForce = 16f;
     private State state;
 
+    public event EventHandler OnPlayStarted;
+    public event EventHandler OnDie;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -47,6 +51,8 @@ public class Bird : MonoBehaviour
                     rb.isKinematic = false;
                     state = State.Playing;
                     SetAnimation(Animation.Flaying);
+
+                    OnPlayStarted?.Invoke(this, EventArgs.Empty);
                 }
                 break;
 
@@ -87,5 +93,7 @@ public class Bird : MonoBehaviour
     {
         state = State.Died;
         SetAnimation(Animation.Died);
+
+        OnDie?.Invoke(this, EventArgs.Empty);
     }
 }
