@@ -117,22 +117,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: EnemyIdleSprite_0
+      name: BirdEnemyIdleSprite_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 30
-        width: 113
-        height: 67
+        x: 0
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: caa0741dc3b5519f0800000000000000
-      internalID: -498391866987312468
+      spriteID: 274341e4e3b94834ba53cbd44165ad82
+      internalID: 1588444951
       vertices: []
       indices: 
       edges: []
@@ -140,7 +140,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 972654a5833ec3f498d1f2f48e14ca01
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      EnemyIdleSprite_0: -498391866987312468
+      BirdEnemyIdleSprite_0: 1588444951
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
