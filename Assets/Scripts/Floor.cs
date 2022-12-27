@@ -5,7 +5,7 @@ using UnityEngine;
 public class Floor : MonoBehaviour
 {
     private const float X_START_POSITION = 11.5f;
-    private const float X_END_POSITION = -8.5f;
+    private const float X_END_POSITION = -13.5f;
 
     public void Move(float speed)
     {

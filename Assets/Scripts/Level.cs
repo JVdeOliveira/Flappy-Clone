@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Level : MonoBehaviour
 {
+    public static Level Instance { get; private set; }
+
     private enum Difficulty
     {
         Easy,
@@ -14,6 +17,7 @@ public class Level : MonoBehaviour
 
     [SerializeField] private Bird bird;
     [SerializeField] private Transform collumnPrefab;
+    [SerializeField] private Transform floorContainer;
 
     private float delay = 1.25f;
     private float currentTime;
@@ -22,15 +26,27 @@ public class Level : MonoBehaviour
     private float collumnGapSize;
     private int collumnCountCreate;
 
-    [SerializeField] 
     private List<Floor> floorList;
     private List<Collumn> collumnList;
 
     private bool isActive = false;
 
+    public int ScoreAmount { get; private set; }
+    public event EventHandler OnScoreChanged;
+
     private void Awake()
     {
+        Instance = this;
+
         collumnList = new List<Collumn>();
+        floorList = new List<Floor>();
+
+        foreach (Transform floorTransform in floorContainer)
+        {
+            Floor floor = floorTransform.GetComponent<Floor>();
+            floorList.Add(floor);
+        }
+
         SetDifficulty(GetDifficulty());
 
         bird.OnPlayStarted += Bird_OnPlayStarted;
@@ -54,7 +70,7 @@ public class Level : MonoBehaviour
         Vector3 CratePosition = new()
         {
             x = 10f,
-            y = Random.Range(-yPositionRange, yPositionRange)
+            y = UnityEngine.Random.Range(-yPositionRange, yPositionRange)
         };
 
         Collumn collumn = Instantiate(collumnPrefab, CratePosition, Quaternion.identity).GetComponent<Collumn>();
@@ -64,6 +80,12 @@ public class Level : MonoBehaviour
 
         collumnList.Add(collumn);
         collumnCountCreate++;
+    }
+
+    public void AddScore()
+    {
+        ScoreAmount++;
+        OnScoreChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private void SetDifficulty(Difficulty difficulty)

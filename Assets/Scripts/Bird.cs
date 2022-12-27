@@ -96,4 +96,9 @@ public class Bird : MonoBehaviour
 
         OnDie?.Invoke(this, EventArgs.Empty);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Level.Instance.AddScore();
+    }
 }
