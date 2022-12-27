@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class Level : MonoBehaviour
 {
     private enum Difficulty
     {
@@ -18,9 +18,13 @@ public class Spawner : MonoBehaviour
     private float delay = 1.25f;
     private float currentTime;
 
+    private float collumnSpeed = 5f;
     private float collumnGapSize;
-    private List<Collumn> collumnList;
     private int collumnCountCreate;
+
+    [SerializeField] 
+    private List<Floor> floorList;
+    private List<Collumn> collumnList;
 
     private bool isActive = false;
 
@@ -55,7 +59,7 @@ public class Spawner : MonoBehaviour
 
         Collumn collumn = Instantiate(collumnPrefab, CratePosition, Quaternion.identity).GetComponent<Collumn>();
 
-        collumn.SetGap(collumnGapSize);
+        collumn.SetCollum(collumnGapSize, collumnSpeed);
         collumn.transform.SetParent(transform);
 
         collumnList.Add(collumn);
@@ -117,6 +121,11 @@ public class Spawner : MonoBehaviour
             SetDifficulty(GetDifficulty());
 
             currentTime = delay;
+        }
+
+        foreach (Floor floor in floorList)
+        {
+            floor.Move(collumnSpeed);
         }
     }
 }
