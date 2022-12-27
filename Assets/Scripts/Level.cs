@@ -29,10 +29,13 @@ public class Level : MonoBehaviour
     private List<Floor> floorList;
     private List<Collumn> collumnList;
 
-    private bool isActive = false;
+    private bool isActive;
 
     public int ScoreAmount { get; private set; }
+    
     public event EventHandler OnScoreChanged;
+    public event EventHandler OnGameOver;
+    public event EventHandler OnGameStarted;
 
     private void Awake()
     {
@@ -56,11 +59,13 @@ public class Level : MonoBehaviour
     private void Bird_OnDie(object sender, System.EventArgs e)
     {
         isActive = false;
+        OnGameOver?.Invoke(this, EventArgs.Empty);
     }
 
     private void Bird_OnPlayStarted(object sender, System.EventArgs e)
     {
         isActive = true;
+        OnGameStarted?.Invoke(this, EventArgs.Empty);
     }
 
     private void CrateCollumn()
